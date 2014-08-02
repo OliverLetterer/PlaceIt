@@ -15,11 +15,15 @@ view.layoutSubview(blueView,
     atPosition: Position(horizontal: .Center, vertical: .Bottom(0)))
 ```
 
+![sample](https://raw.githubusercontent.com/OliverLetterer/PlaceIt/master/Screenshots/sample-1.png)
+
 * bottom right with padding
 ``` swift
 view.layoutSubview(blueView,
     atPosition: Position(horizontal: .Right(14), vertical: .Bottom(14)))
 ```
+
+![sample](https://raw.githubusercontent.com/OliverLetterer/PlaceIt/master/Screenshots/sample-2.png)
 
 * two views at the bottom
 ``` swift
@@ -32,6 +36,8 @@ view
         withSize: CGSize(width: CGRectGetWidth(view.bounds) / 2.0, height: buttonHeight))
 ```
 
+![sample](https://raw.githubusercontent.com/OliverLetterer/PlaceIt/master/Screenshots/sample-3.png)
+
 * add two labels centered between navigation bar and bottom views
 ``` swift
 let buttonHeight: CGFloat = 66.0
@@ -43,6 +49,8 @@ view
     direction: .TopToBottom,
     inRect: visibleBounds)
 ```
+
+![sample](https://raw.githubusercontent.com/OliverLetterer/PlaceIt/master/Screenshots/sample-4.png)
 
 * split view in two left and right sections
 ``` swift
@@ -64,6 +72,8 @@ view
       inRect: rightFrame,
       interItemSpacing: 7)
 ```
+
+![sample](https://raw.githubusercontent.com/OliverLetterer/PlaceIt/master/Screenshots/sample-5.png)
 
 ## Installation
 
