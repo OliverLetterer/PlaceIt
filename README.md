@@ -7,9 +7,20 @@
 
 ## Usage
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+PlaceIt let's You place Your UIView subclasses at positions:
 
-## Requirements
+``` swift
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        let buttonHeight: CGFloat = 66.0
+        let visibleBounds = UIEdgeInsetsInsetRect(view.bounds, UIEdgeInsetsMake(44 + 20, 0, buttonHeight, 0))
+
+        view.layoutSubview(blueView,
+            atPosition: LayoutPosition(horizontal: .Left(0.0), vertical: .Bottom(0.0)),
+            withSize: CGSize(width: CGRectGetWidth(view.bounds) / 2.0, height: buttonHeight))
+    }
+```
 
 ## Installation
 
@@ -25,4 +36,3 @@ Oliver Letterer, oliver.letterer@gmail.com
 ## License
 
 PlaceIt is available under the MIT license. See the LICENSE file for more info.
-

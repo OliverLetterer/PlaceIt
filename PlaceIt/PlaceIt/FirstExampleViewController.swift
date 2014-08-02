@@ -54,13 +54,13 @@ class FirstExampleViewController: UIViewController {
 
         view
             .layoutSubview(blueView,
-                atPosition: Position(horizontal: .Left(0.0), vertical: .Bottom(0.0)),
+                atPosition: LayoutPosition(horizontal: .Left(0.0), vertical: .Bottom(0.0)),
                 withSize: CGSize(width: CGRectGetWidth(view.bounds) / 2.0, height: buttonHeight))
             .layoutSubview(greenView,
-                atPosition: Position(horizontal: .Right(0.0), vertical: .Bottom(0.0)),
+                atPosition: LayoutPosition(horizontal: .Right(0.0), vertical: .Bottom(0.0)),
                 withSize: CGSize(width: CGRectGetWidth(view.bounds) / 2.0, height: buttonHeight))
             .layoutSubviews([titleLabel, subtitleLabel],
-                atPosition: Position(horizontal: .Center, vertical: .Center),
+                atPosition: LayoutPosition(horizontal: .Center, vertical: .Center),
                 direction: .TopToBottom,
                 inRect: visibleBounds)
     }

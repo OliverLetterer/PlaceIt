@@ -8,14 +8,14 @@
 
 import UIKit
 
-public enum HorizontalLayout {
+public enum HorizontalLayoutPosition {
     case Left(CGFloat)
     case Center
     case Right(CGFloat)
     case EdgeToEdge
 }
 
-public enum VerticalLayout {
+public enum VerticalLayoutPosition {
     case Top(CGFloat)
     case Above(UIView, CGFloat)
     case Center
@@ -29,21 +29,21 @@ public enum LayoutDirection {
     case LeftToRight
 }
 
-public struct Position {
-    var horizontal: HorizontalLayout
-    var vertical: VerticalLayout
+public struct LayoutPosition {
+    var horizontal: HorizontalLayoutPosition
+    var vertical: VerticalLayoutPosition
 }
 
 public extension UIView {
-    func layoutSubview(subview: UIView, atPosition position: Position) -> Self {
+    func layoutSubview(subview: UIView, atPosition position: LayoutPosition) -> Self {
         return layoutSubview(subview, atPosition: position, withSize: subview.sizeThatFits(bounds.size))
     }
 
-    func layoutSubview(subview: UIView, atPosition position: Position, withSize size: CGSize) -> Self {
+    func layoutSubview(subview: UIView, atPosition position: LayoutPosition, withSize size: CGSize) -> Self {
         return layoutSubview(subview, atPosition: position, withSize: size, inRect: bounds)
     }
 
-    func layoutSubview(subview: UIView, atPosition position: Position, withSize size: CGSize, inRect layoutRect:CGRect) -> Self {
+    func layoutSubview(subview: UIView, atPosition position: LayoutPosition, withSize size: CGSize, inRect layoutRect:CGRect) -> Self {
         assert(subview.isDescendantOfView(self), "subview is no descendant of self");
 
         var frame = CGRect(origin: CGPointZero, size: size)
@@ -81,15 +81,15 @@ public extension UIView {
         return self
     }
 
-    func layoutSubviews(subviews: [UIView], atPosition position: Position, direction: LayoutDirection) -> Self {
+    func layoutSubviews(subviews: [UIView], atPosition position: LayoutPosition, direction: LayoutDirection) -> Self {
         return layoutSubviews(subviews, atPosition: position, direction: direction, inRect: bounds)
     }
 
-    func layoutSubviews(subviews: [UIView], atPosition position: Position, direction: LayoutDirection, inRect rect:CGRect) -> Self {
+    func layoutSubviews(subviews: [UIView], atPosition position: LayoutPosition, direction: LayoutDirection, inRect rect:CGRect) -> Self {
         return layoutSubviews(subviews, atPosition: position, direction: direction, inRect: rect, interItemSpacing: 0)
     }
 
-    func layoutSubviews(subviews: [UIView], atPosition position: Position, direction: LayoutDirection, inRect rect:CGRect, interItemSpacing: CGFloat) -> Self {
+    func layoutSubviews(subviews: [UIView], atPosition position: LayoutPosition, direction: LayoutDirection, inRect rect:CGRect, interItemSpacing: CGFloat) -> Self {
         assert(subviews.count > 0, "no subviews")
 
         let reduceHeightOrWidth = { (dimension: CGFloat, view: UIView) -> CGFloat in
@@ -128,12 +128,12 @@ public extension UIView {
             for (index, view) in enumerate(subviews) {
                 if index == 0 {
                     layoutSubview(view,
-                        atPosition: Position(horizontal: position.horizontal, vertical: .Top(topOffset)),
+                        atPosition: LayoutPosition(horizontal: position.horizontal, vertical: .Top(topOffset)),
                         withSize: view.sizeThatFits(rect.size),
                         inRect: globalFrame)
                 } else {
                     layoutSubview(view,
-                        atPosition: Position(horizontal: position.horizontal, vertical: .Below(subviews[index - 1], interItemSpacing)),
+                        atPosition: LayoutPosition(horizontal: position.horizontal, vertical: .Below(subviews[index - 1], interItemSpacing)),
                         withSize: view.sizeThatFits(rect.size),
                         inRect: globalFrame)
                 }

@@ -10,9 +10,9 @@
 Pod::Spec.new do |s|
   s.name             = "PlaceIt"
   s.version          = "0.1.0"
-  s.summary          = "Manual layout engine in swift."
+  s.summary          = "Swiftly place your views."
   s.homepage         = "https://github.com/OliverLetterer/PlaceIt"
-  s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
+  s.screenshots      = "https://raw.githubusercontent.com/OliverLetterer/PlaceIt/master/Screenshots/screenshot-1.png", "https://raw.githubusercontent.com/OliverLetterer/PlaceIt/master/Screenshots/screenshot-2.png"
   s.license          = 'MIT'
   s.author           = { "Oliver Letterer" => "oliver.letterer@gmail.com" }
   s.source           = { :git => "https://github.com/OliverLetterer/PlaceIt.git", :tag => s.version.to_s }
