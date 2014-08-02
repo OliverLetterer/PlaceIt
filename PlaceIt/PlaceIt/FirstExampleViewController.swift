@@ -17,7 +17,7 @@ class FirstExampleViewController: UIViewController {
     override func loadView() {
         super.loadView()
 
-        blueView = UIView(frame: CGRectZero)
+        blueView = UIView(frame: CGRect(origin: CGPoint(), size: CGSize(width: 200, height: 66)))
         blueView.backgroundColor = UIColor.blueColor()
         view.addSubview(blueView);
 
@@ -54,13 +54,13 @@ class FirstExampleViewController: UIViewController {
 
         view
             .layoutSubview(blueView,
-                atPosition: LayoutPosition(horizontal: .Left(0.0), vertical: .Bottom(0.0)),
+                atPosition: Position(horizontal: .Left(0.0), vertical: .Bottom(0.0)),
                 withSize: CGSize(width: CGRectGetWidth(view.bounds) / 2.0, height: buttonHeight))
             .layoutSubview(greenView,
-                atPosition: LayoutPosition(horizontal: .Right(0.0), vertical: .Bottom(0.0)),
+                atPosition: Position(horizontal: .Right(0.0), vertical: .Bottom(0.0)),
                 withSize: CGSize(width: CGRectGetWidth(view.bounds) / 2.0, height: buttonHeight))
             .layoutSubviews([titleLabel, subtitleLabel],
-                atPosition: LayoutPosition(horizontal: .Center, vertical: .Center),
+                atPosition: Position(horizontal: .Center, vertical: .Center),
                 direction: .TopToBottom,
                 inRect: visibleBounds)
     }

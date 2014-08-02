@@ -9,17 +9,60 @@
 
 PlaceIt let's You place Your UIView subclasses at positions:
 
+* position a view at the bottom center:
 ``` swift
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+view.layoutSubview(blueView,
+    atPosition: Position(horizontal: .Center, vertical: .Bottom(0)))
+```
 
-        let buttonHeight: CGFloat = 66.0
-        let visibleBounds = UIEdgeInsetsInsetRect(view.bounds, UIEdgeInsetsMake(44 + 20, 0, buttonHeight, 0))
+* bottom right with padding
+``` swift
+view.layoutSubview(blueView,
+    atPosition: Position(horizontal: .Right(14), vertical: .Bottom(14)))
+```
 
-        view.layoutSubview(blueView,
-            atPosition: LayoutPosition(horizontal: .Left(0.0), vertical: .Bottom(0.0)),
-            withSize: CGSize(width: CGRectGetWidth(view.bounds) / 2.0, height: buttonHeight))
-    }
+* two views at the bottom
+``` swift
+view
+    .layoutSubview(blueView,
+        atPosition: Position(horizontal: .Left(0.0), vertical: .Bottom(0.0)),
+        withSize: CGSize(width: CGRectGetWidth(view.bounds) / 2.0, height: buttonHeight))
+    .layoutSubview(greenView,
+        atPosition: Position(horizontal: .Right(0.0), vertical: .Bottom(0.0)),
+        withSize: CGSize(width: CGRectGetWidth(view.bounds) / 2.0, height: buttonHeight))
+```
+
+* add two labels centered between navigation bar and bottom views
+``` swift
+let buttonHeight: CGFloat = 66.0
+let visibleBounds = view.bounds.inset(UIEdgeInsetsMake(44 + 20, 0, buttonHeight, 0))
+
+view
+  .layoutSubviews([titleLabel, subtitleLabel],
+    atPosition: Position(horizontal: .Center, vertical: .Center),
+    direction: .TopToBottom,
+    inRect: visibleBounds)
+```
+
+* split view in two left and right sections
+``` swift
+view
+  .layoutSubview(blueView,
+      atPosition: Position(horizontal: .Left(0.0), vertical: .Bottom(0.0)),
+      withSize: CGSize(width: CGRectGetWidth(view.bounds) / 2.0, height: buttonHeight))
+  .layoutSubview(greenView,
+      atPosition: Position(horizontal: .Right(0.0), vertical: .Bottom(0.0)),
+      withSize: CGSize(width: CGRectGetWidth(view.bounds) / 2.0, height: buttonHeight))
+  .layoutSubviews([ leftImageView, leftLabel ],
+      atPosition: Position(horizontal: .Center, vertical: .Center),
+      direction: .TopToBottom,
+      inRect: leftFrame,
+      interItemSpacing: 7)
+  .layoutSubviews([ rightImageView, rightLabel ],
+      atPosition: Position(horizontal: .Center, vertical: .Center),
+      direction: .TopToBottom,
+      inRect: rightFrame,
+      interItemSpacing: 7)
 ```
 
 ## Installation
