@@ -7,7 +7,7 @@
 
 ## Usage
 
-Simply Place your views ... Swiftly:
+Simply place your views ... Swiftly:
 
 * position a view at the bottom center:
 ``` swift
