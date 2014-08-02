@@ -54,6 +54,11 @@ view
 
 * split view in two left and right sections
 ``` swift
+let buttonHeight: CGFloat = 66.0
+let (leftFrame, rightFrame) = view.bounds
+  .inset(UIEdgeInsets(bottom: buttonHeight))
+  .divide(CGRectGetWidth(view.bounds) / 2, edge: .MinXEdge)
+
 view
   .layoutSubview(blueView,
       atPosition: Position(horizontal: .Left(0.0), vertical: .Bottom(0.0)),
