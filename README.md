@@ -7,7 +7,7 @@
 
 ## Usage
 
-PlaceIt let's You place Your UIView subclasses at positions:
+Simply Place your views ... Swiftly:
 
 * position a view at the bottom center:
 ``` swift
