@@ -43,6 +43,10 @@ public extension UIView {
         return layoutSubview(subview, atPosition: position, withSize: size, inRect: bounds)
     }
 
+    func layoutSubview(subview: UIView, atPosition position: Position, inRect rect: CGRect) -> Self {
+        return layoutSubview(subview, atPosition: position, withSize: subview.sizeThatFits(rect.size), inRect: rect)
+    }
+
     func layoutSubview(subview: UIView, atPosition position: Position, withSize size: CGSize, inRect layoutRect:CGRect) -> Self {
         assert(subview.isDescendantOfView(self), "subview is no descendant of self");
 
