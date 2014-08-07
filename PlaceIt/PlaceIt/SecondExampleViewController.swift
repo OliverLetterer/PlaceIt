@@ -71,18 +71,18 @@ class SecondExampleViewController: UIViewController {
 
         view
             .layoutSubview(blueView,
-                atPosition: Position(horizontal: .Left(0.0), vertical: .Bottom(0.0)),
+                atPosition: (horizontal: .Left(0.0), vertical: .Bottom(0.0)),
                 withSize: CGSize(width: CGRectGetWidth(view.bounds) / 2.0, height: buttonHeight))
             .layoutSubview(greenView,
-                atPosition: Position(horizontal: .Right(0.0), vertical: .Bottom(0.0)),
+                atPosition: (horizontal: .Right(0.0), vertical: .Bottom(0.0)),
                 withSize: CGSize(width: CGRectGetWidth(view.bounds) / 2.0, height: buttonHeight))
             .layoutSubviews([ leftImageView, leftLabel ],
-                atPosition: Position(horizontal: .Center, vertical: .Center),
+                atPosition: (horizontal: .Center, vertical: .Center),
                 direction: .TopToBottom,
                 inRect: leftFrame,
                 interItemSpacing: 7)
             .layoutSubviews([ rightImageView, rightLabel ],
-                atPosition: Position(horizontal: .Center, vertical: .Center),
+                atPosition: (horizontal: .Center, vertical: .Center),
                 direction: .TopToBottom,
                 inRect: rightFrame,
                 interItemSpacing: 7)

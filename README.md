@@ -12,7 +12,7 @@ Simply place your views ... Swiftly:
 * position a view at the bottom center:
 ``` swift
 view.layoutSubview(blueView,
-    atPosition: Position(horizontal: .Center, vertical: .Bottom(0)))
+    atPosition: (horizontal: .Center, vertical: .Bottom(0)))
 ```
 
 <img src="https://raw.githubusercontent.com/OliverLetterer/PlaceIt/master/Screenshots/sample-1.png" width=200px>
@@ -20,7 +20,7 @@ view.layoutSubview(blueView,
 * bottom right with padding
 ``` swift
 view.layoutSubview(blueView,
-    atPosition: Position(horizontal: .Right(14), vertical: .Bottom(14)))
+    atPosition: (horizontal: .Right(14), vertical: .Bottom(14)))
 ```
 
 <img src="https://raw.githubusercontent.com/OliverLetterer/PlaceIt/master/Screenshots/sample-2.png" width=200px>
@@ -29,10 +29,10 @@ view.layoutSubview(blueView,
 ``` swift
 view
     .layoutSubview(blueView,
-        atPosition: Position(horizontal: .Left(0.0), vertical: .Bottom(0.0)),
+        atPosition: (horizontal: .Left(0.0), vertical: .Bottom(0.0)),
         withSize: CGSize(width: CGRectGetWidth(view.bounds) / 2.0, height: buttonHeight))
     .layoutSubview(greenView,
-        atPosition: Position(horizontal: .Right(0.0), vertical: .Bottom(0.0)),
+        atPosition: (horizontal: .Right(0.0), vertical: .Bottom(0.0)),
         withSize: CGSize(width: CGRectGetWidth(view.bounds) / 2.0, height: buttonHeight))
 ```
 
@@ -45,7 +45,7 @@ let visibleBounds = view.bounds.inset(UIEdgeInsetsMake(44 + 20, 0, buttonHeight,
 
 view
   .layoutSubviews([titleLabel, subtitleLabel],
-    atPosition: Position(horizontal: .Center, vertical: .Center),
+    atPosition: (horizontal: .Center, vertical: .Center),
     direction: .TopToBottom,
     inRect: visibleBounds)
 ```
@@ -61,18 +61,18 @@ let (leftFrame, rightFrame) = view.bounds
 
 view
   .layoutSubview(blueView,
-      atPosition: Position(horizontal: .Left(0.0), vertical: .Bottom(0.0)),
+      atPosition: (horizontal: .Left(0.0), vertical: .Bottom(0.0)),
       withSize: CGSize(width: CGRectGetWidth(view.bounds) / 2.0, height: buttonHeight))
   .layoutSubview(greenView,
-      atPosition: Position(horizontal: .Right(0.0), vertical: .Bottom(0.0)),
+      atPosition: (horizontal: .Right(0.0), vertical: .Bottom(0.0)),
       withSize: CGSize(width: CGRectGetWidth(view.bounds) / 2.0, height: buttonHeight))
   .layoutSubviews([ leftImageView, leftLabel ],
-      atPosition: Position(horizontal: .Center, vertical: .Center),
+      atPosition: (horizontal: .Center, vertical: .Center),
       direction: .TopToBottom,
       inRect: leftFrame,
       interItemSpacing: 7)
   .layoutSubviews([ rightImageView, rightLabel ],
-      atPosition: Position(horizontal: .Center, vertical: .Center),
+      atPosition: (horizontal: .Center, vertical: .Center),
       direction: .TopToBottom,
       inRect: rightFrame,
       interItemSpacing: 7)

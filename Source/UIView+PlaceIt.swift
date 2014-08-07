@@ -12,12 +12,12 @@ public enum HorizontalPosition {
     case Left(CGFloat)
     case Center
     case Right(CGFloat)
-    case EdgeToEdge
+    case Aside(UIView, CGFloat)
+    case EdgeToEdge(CGFloat)
 }
 
 public enum VerticalPosition {
     case Top(CGFloat)
-    case Above(UIView, CGFloat)
     case Center
     case Bottom(CGFloat)
     case Below(UIView, CGFloat)
@@ -29,10 +29,7 @@ public enum LayoutDirection {
     case LeftToRight
 }
 
-public struct Position {
-    var horizontal: HorizontalPosition
-    var vertical: VerticalPosition
-}
+public typealias Position = (horizontal: HorizontalPosition, vertical: VerticalPosition)
 
 public extension UIView {
     func layoutSubview(subview: UIView, atPosition position: Position) -> Self {
@@ -59,16 +56,16 @@ public extension UIView {
             frame.origin.x = CGRectGetMidX(layoutRect) - size.width / 2.0
         case .Right(let inset):
             frame.origin.x = CGRectGetMaxX(layoutRect) - size.width - inset
-        case .EdgeToEdge:
-            frame.origin.x = CGRectGetMinX(layoutRect)
-            frame.size.width = CGRectGetWidth(layoutRect)
+        case .Aside(let view, let offset):
+            frame.origin.x = CGRectGetMaxX(view.frame) + offset
+        case .EdgeToEdge(let inset):
+            frame.origin.x = CGRectGetMinX(layoutRect) + inset
+            frame.size.width = CGRectGetWidth(layoutRect) - 2.0 * inset
         }
 
         switch position.vertical {
         case .Top(let inset):
             frame.origin.y = CGRectGetMinY(layoutRect) + inset
-        case .Above(let view, let offset):
-            frame.origin.y = CGRectGetMinY(view.frame) - offset - size.height
         case .Center:
             frame.origin.y = CGRectGetMidY(layoutRect) - size.height / 2.0
         case .Bottom(let inset):
@@ -81,7 +78,6 @@ public extension UIView {
         }
 
         subview.frame = frame
-
         return self
     }
 
@@ -114,8 +110,6 @@ public extension UIView {
             switch position.vertical {
             case .Top(let inset):
                 topOffset = CGRectGetMinY(rect) + inset
-            case .Above(let view, let offset):
-                topOffset = CGRectGetMinY(view.frame) - offset - overallHeightOrWidth
             case .Center:
                 topOffset = CGRectGetMidY(rect) - overallHeightOrWidth / 2.0
             case .Bottom(let inset):
@@ -132,18 +126,48 @@ public extension UIView {
             for (index, view) in enumerate(subviews) {
                 if index == 0 {
                     layoutSubview(view,
-                        atPosition: Position(horizontal: position.horizontal, vertical: .Top(topOffset)),
+                        atPosition: (horizontal: position.horizontal, vertical: .Top(topOffset)),
                         withSize: view.sizeThatFits(rect.size),
                         inRect: globalFrame)
                 } else {
                     layoutSubview(view,
-                        atPosition: Position(horizontal: position.horizontal, vertical: .Below(subviews[index - 1], interItemSpacing)),
+                        atPosition: (horizontal: position.horizontal, vertical: .Below(subviews[index - 1], interItemSpacing)),
                         withSize: view.sizeThatFits(rect.size),
                         inRect: globalFrame)
                 }
             }
         case .LeftToRight:
-            abort()
+            var leftOffset: CGFloat = 0.0
+
+            switch position.horizontal {
+            case .Left(let inset):
+                leftOffset = CGRectGetMinX(rect) + inset
+            case .Center:
+                leftOffset = CGRectGetMidX(rect) - overallHeightOrWidth / 2.0
+            case .Right(let inset):
+                leftOffset = CGRectGetMaxX(rect) - overallHeightOrWidth - inset
+            case .Aside(let view, let offset):
+                leftOffset = CGRectGetMaxX(view.frame) + offset
+            case .EdgeToEdge(let inset):
+                leftOffset = CGRectGetMinX(rect) + inset
+            }
+
+            var globalFrame = rect
+            globalFrame.origin.x = 0
+
+            for (index, view) in enumerate(subviews) {
+                if index == 0 {
+                    layoutSubview(view,
+                        atPosition: (horizontal: .Left(leftOffset), vertical: position.vertical),
+                        withSize: view.sizeThatFits(rect.size),
+                        inRect: globalFrame)
+                } else {
+                    layoutSubview(view,
+                        atPosition: (horizontal: .Aside(subviews[index - 1], interItemSpacing), vertical: position.vertical),
+                        withSize: view.sizeThatFits(rect.size),
+                        inRect: globalFrame)
+                }
+            }
         }
         
         return self
